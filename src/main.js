@@ -1,42 +1,28 @@
-import { fetchArtists, fetchArtistById } from './js/api.js';
-import {
-  renderArtists,
-  clearArtists,
-  showLoadMoreBtn,
-  openArtistModal,
-  closeModal,
-} from './js/render.js';
+import { fetchArtists } from './js/api.js';
+import { createArtistCard } from './js/render.js';
 
-let page = 1,
-  total = 0,
-  shown = 0;
+const artistsList = document.querySelector('.artists-list');
 
-async function loadArtists(reset = false) {
+async function loadArtists(page = 1, limit = 12) {
   try {
-    const res = await fetchArtists(page);
-    total = res.total;
-    reset ? clearArtists() : null;
-    renderArtists(res.data);
-    shown += res.data.length;
-    showLoadMoreBtn(total, shown);
-  } catch (e) {
-    alert('Error loading artists');
+    const data = await fetchArtists(page, limit);
+
+    const { artists } = data;
+
+    if (!Array.isArray(artists)) {
+      throw new Error('Невірна структура даних: artists не є масивом');
+    }
+
+    renderArtists(artists);
+  } catch (error) {
+    console.error('Помилка при завантаженні артистів:', error.message);
   }
 }
 
-document.querySelector('.load-more').addEventListener('click', () => {
-  page++;
-  loadArtists();
-});
+function renderArtists(artists) {
+  artistsList.innerHTML = ''; // очищення перед рендером
+  const markup = artists.map(createArtistCard).join('');
+  artistsList.insertAdjacentHTML('beforeend', markup);
+}
 
-document.querySelector('.artists-grid').addEventListener('click', async e => {
-  const card = e.target.closest('.artist-card');
-  if (!card) return;
-  const artist = await fetchArtistById(card.dataset.id);
-  openArtistModal(artist);
-});
-
-document.querySelector('.modal-close').addEventListener('click', closeModal);
-
-// Initial render
-loadArtists(true);
+loadArtists();
