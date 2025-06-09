@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/goit-js-hw-12/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/projeckt-tests/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanilla App Template</title>
     <link
@@ -13,14 +13,17 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css"
     />
-    <script type="module" crossorigin src="/goit-js-hw-12/index.js"></script>
-    <link rel="stylesheet" crossorigin href="/goit-js-hw-12/assets/index-DTfu_EAE.css">
+    <script type="module" crossorigin src="/projeckt-tests/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/projeckt-tests/assets/vendor-B2YOV0tR.js">
+    <link rel="stylesheet" crossorigin href="/projeckt-tests/assets/index-DTfu_EAE.css">
   </head>
   <body>
-    <section id="artists" class="artists-section">
-      <h2>Artists</h2>
-      <div class="artists-list"></div>
-      <button id="load-more" class="load-more">Load more</button>
-    </section>
+    <div class="artists-container">
+      <section id="artists" class="artists-section">
+        <h2>Artists</h2>
+        <ul class="artists-list"></ul>
+        <button id="load-more" class="load-more">Load more</button>
+      </section>
+    </div>
   </body>
 </html>
