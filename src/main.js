@@ -1,5 +1,6 @@
 import { fetchArtists } from './js/api.js';
 import { createArtistCard } from './js/render.js';
+import './css/styles.css';
 
 const artistsList = document.querySelector('.artists-list');
 
