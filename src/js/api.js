@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export async function fetchArtists(page = 1, limit = 12) {
+export async function fetchArtists(page = 1, limit = 8) {
   const url = `https://sound-wave.b.goit.study/api/artists?page=${page}&limit=${limit}`;
 
   try {
